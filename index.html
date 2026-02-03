@@ -68,7 +68,7 @@
         .note {
             margin-top: 30px;
             margin-bottom: 30px;
-            font-size: 12px;
+            font-size: 14px;
             color: #666;
         }
 
@@ -86,10 +86,10 @@
 <body>
 
     <div class="card" id="card">
-        <div class="emoji">🐱💗</div>
+        <div class="emoji">💗</div>
         <h1>Fina, will you be my valentine?</h1>
         
-        <div class="note">Not taking <b>"NO"</b> for an answer 😏</div>
+        <div class="note" id="note">Not taking <b>"NO"</b> for an answer 😌</div>
 
         <div class="buttons">
             <button id="yes">Yes</button>
@@ -101,6 +101,8 @@
         const noBtn = document.getElementById("no");
         const yesBtn = document.getElementById("yes");
         const card = document.getElementById("card");
+        const note = document.getElementById("note")
+        var noBtnPressCount = 0;
 
         noBtn.addEventListener("mouseenter", () => {
             const cardRect = card.getBoundingClientRect();
@@ -113,6 +115,17 @@
 
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
+            noBtnPressCount++;
+
+            if (noBtnPressCount > 4) {
+                noBtn.style.display = "none";
+        
+                 note.innerHTML = `
+                     <div class="note">Come on now 😏</div>
+                 `;
+
+                yesBtn.style.left = `35%`;
+            }
         });
 
         yesBtn.addEventListener("click", () => {
