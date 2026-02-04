@@ -115,7 +115,7 @@
         const note = document.getElementById("note")
         var noBtnPressCount = 0;
 
-        noBtn.addEventListener("mouseenter", () => {
+        function moveNoButton() {
             const cardRect = card.getBoundingClientRect();
 
             const maxX = cardRect.width - noBtn.offsetWidth;
@@ -131,13 +131,20 @@
             if (noBtnPressCount > 4) {
                 noBtn.style.display = "none";
         
-                 note.innerHTML = `
-                     <div class="note">Come on now 😏</div>
-                 `;
+                    note.innerHTML = `
+                        <div class="note">Come on now 😏</div>
+                    `;
 
                 yesBtn.style.left = `35%`;
-            }
-        });
+            };
+        }
+
+        noBtn.addEventListener("mouseenter", moveNoButton); // Desktop: mouse hover
+        noBtn.addEventListener("touchstart", (e) => {
+            e.preventDefault(); 
+            moveNoButton();
+        }, { passive: false }); // Mobile: finger touch (fires before click)
+        noBtn.addEventListener("click", moveNoButton); // Extra safety: if someone somehow clicks it
 
         yesBtn.addEventListener("click", () => {
             card.innerHTML = `
