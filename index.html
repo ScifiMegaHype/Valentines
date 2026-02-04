@@ -87,7 +87,7 @@
 
     <div class="card" id="card">
         <div class="emoji">💗</div>
-        <h1>Fina, will you be my valentine?</h1>
+        <h1 id="question"></h1>
         
         <div class="note" id="note">Not taking <b>"NO"</b> for an answer 😌</div>
 
@@ -98,6 +98,17 @@
     </div>
 
     <script>
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get("name") || "";
+        if (!name) {
+            document.getElementById("question").textContent =
+            `Will you be my valentine?`;
+        }
+        else {
+            document.getElementById("question").textContent =
+            `${name}, will you be my valentine?`;
+        }
+
         const noBtn = document.getElementById("no");
         const yesBtn = document.getElementById("yes");
         const card = document.getElementById("card");
